@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="angular2 模块 每个 Angular 应用至少有一个模块（根模块），习惯上命名为AppModule。 Angular 模块（无论是根模块还是特性模块）都是一个带有@NgModule装饰器的类。 NgModule是一个装饰器函数，它接收一个用来描述模块属性的元数据对象。   简单根模块的设置   12345678">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular-learning">
+<meta property="og:url" content="https://cramonde.github.io/2018/01/05/angular-learning/index.html">
+<meta property="og:site_name" content="cramon BLOG">
+<meta property="og:description" content="angular2 模块 每个 Angular 应用至少有一个模块（根模块），习惯上命名为AppModule。 Angular 模块（无论是根模块还是特性模块）都是一个带有@NgModule装饰器的类。 NgModule是一个装饰器函数，它接收一个用来描述模块属性的元数据对象。   简单根模块的设置   12345678910import &amp;#123; NgModule &amp;#125;      fr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://angular.cn/resources/images/devguide/architecture/template-metadata-component.png">
+<meta property="og:image" content="https://angular.cn/resources/images/devguide/forms/name-required-error.png">
+<meta property="og:updated_time" content="2018-04-22T06:19:13.140Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular-learning">
+<meta name="twitter:description" content="angular2 模块 每个 Angular 应用至少有一个模块（根模块），习惯上命名为AppModule。 Angular 模块（无论是根模块还是特性模块）都是一个带有@NgModule装饰器的类。 NgModule是一个装饰器函数，它接收一个用来描述模块属性的元数据对象。   简单根模块的设置   12345678910import &amp;#123; NgModule &amp;#125;      fr">
+<meta name="twitter:image" content="https://angular.cn/resources/images/devguide/architecture/template-metadata-component.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cramonde.github.io/2018/01/05/angular-learning/"/>
+
+
+
+
+
+  <title>angular-learning | cramon BLOG</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cramon BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cramonde.github.io/2018/01/05/angular-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cramon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://cramon.tk/guitar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cramon BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">angular-learning</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T00:17:32+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/05/angular-learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/05/angular-learning/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="angular2"><a href="#angular2" class="headerlink" title="angular2"></a>angular2</h2><hr>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><ul>
+<li>每个 Angular 应用至少有一个模块（根模块），习惯上命名为<code>AppModule</code>。</li>
+<li>Angular 模块（无论是根模块还是特性模块）都是一个带有<code>@NgModule</code>装饰器的类。</li>
+<li><p><code>NgModule</code>是一个装饰器函数，它接收一个用来描述模块属性的元数据对象。</p>
+<p>  简单根模块的设置</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125;      <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line">@NgModule(&#123;</span><br><span class="line">  imports:      [ BrowserModule ],</span><br><span class="line">  providers:    [ Logger ],</span><br><span class="line">  declarations: [ AppComponent ],</span><br><span class="line">  exports:      [ AppComponent ],</span><br><span class="line">  bootstrap:    [ AppComponent ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>bootstrap</code>表明应用的主视图</p>
+</li>
+<li><code>declarations</code>表明本模块拥有的视图类（只有组件、指令和管道）,自己写的模块应该声明在这个数组中</li>
+<li><code>@NgModule</code>元数据，告诉angular如何去编译和启动应用</li>
+<li>在<code>main.ts</code>中引导根模块来启动应用</li>
+</ul>
+<h3 id="组件（视图）"><a href="#组件（视图）" class="headerlink" title="组件（视图）"></a>组件（视图）</h3><p>我们在类中定义组件的应用逻辑，为视图提供支持。 组件通过一些由属性和方法组成的 API 与视图交互。</p>
+<blockquote>
+<p>命名规范</p>
+</blockquote>
+<ul>
+<li>组件的类名应该是大驼峰形式，并且以Component结尾。 类似HeroDetailComponent。</li>
+<li>组件的文件名应该是小写中线形式，每个单词之间用中线分隔，并且以.component.ts结尾。 因此HeroDetailComponent类应该放在hero-detail.component.ts文件中。</li>
+<li>模板中的标签名字应该是小写中线的形式</li>
+</ul>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><ul>
+<li>通过组件自带的模板来定义组件视图，告诉angular如何渲染组件</li>
+<li>在模板中可以添加自定义元素，当作子组件<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">template: `</span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>My favorite hero is: &#123;&#123;myHero&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Heroes:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span></span><br><span class="line">      &#123;&#123; hero &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里注意angular语法，同时template可以用独立的html文件引入，（tempurl）</p>
+<ul>
+<li>模板引用变量<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">      selector: <span class="string">'key-up2'</span>,</span><br><span class="line">      template: <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;input #box (keyup)="onKey(box.value)"&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;&#123;&#123;values&#125;&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="string">      `</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">KeyUpComponent_v2</span> </span>&#123;</span><br><span class="line">      values = <span class="string">''</span>;</span><br><span class="line">      onKey(value: string) &#123;</span><br><span class="line">        <span class="keyword">this</span>.values += value + <span class="string">' | '</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以从模版当中直接获取输入，注意要绑定事件，只有处理异步事件，才更新</p>
+<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p>要告诉angular某个类是一个组件，就需要把元数据附加到这个类，在typescript中使用装饰器来附加元数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  selector:    <span class="string">'hero-list'</span>,</span><br><span class="line">  templateUrl: <span class="string">'./hero-list.component.html'</span>,</span><br><span class="line">  providers:  [ HeroService ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroListComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要用到<code>@Component</code>装饰器，配置项为：</p>
+<ul>
+<li><code>selector</code>：查找模板当中的标签，并插入</li>
+<li><code>templateUrl</code>表示模板的相对地址</li>
+<li><code>providers</code>表示所需要的服务，是一个数组</li>
+</ul>
+<p>主要思想是想模版中添加元数据，然后angular将其生成组件</p>
+<p><img src="https://angular.cn/resources/images/devguide/architecture/template-metadata-component.png" alt=""></p>
+<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><ul>
+<li><p>单向数据绑定</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;&#123;&#123;hero.name&#125;&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">&lt;hero-detail [hero]="selectedHero"&gt;&lt;/</span>hero-detail&gt;</span><br><span class="line">&lt;li (click)=<span class="string">"selectHero(hero)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双向数据绑定</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input [(ngModel)]=<span class="string">"hero.name"</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Angular 在每个 JavaScript 事件循环中处理所有的数据绑定，它会从组件树的根部开始，递归处理全部子组件。数据通过属性绑定从组件流向视图（模板），而视图通过事件绑定更新属性值</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>组件实际上就是一个带模版的指令，还有：</p>
+<ul>
+<li>结构型指令  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Copy Code</span><br><span class="line">&lt;li *ngFor=<span class="string">"let hero of heroes"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;hero-detail *ngIf=<span class="string">"selectedHero"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">hero-detail</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>通过在 DOM 中添加、移除和替换元素来修改布局。</p>
+<ul>
+<li>属性型指令  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input [(ngModel)]=<span class="string">"hero.name"</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>ngModel</code>指令就是属性型指令的一个例子，它实现了双向数据绑定。 ngModel修改现有元素（一般是<code>&lt;input&gt;</code>）的行为：设置其显示属性值，并响应 change 事件。<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroDetailComponent</span> </span>&#123;</span><br><span class="line">  @Input() hero: Hero;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当组件中的属性需要在父组件或者其他组件当中进行设置的时候,就应该在当前组件的中声明为属性型指令<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'my-app'</span>,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</span></span><br><span class="line"><span class="string">    &lt;h2&gt;My Heroes&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &lt;ul class="heroes"&gt;</span></span><br><span class="line"><span class="string">      &lt;li *ngFor="let hero of heroes"</span></span><br><span class="line"><span class="string">        [class.selected]="hero === selectedHero"</span></span><br><span class="line"><span class="string">        (click)="onSelect(hero)"&gt;</span></span><br><span class="line"><span class="string">        &lt;span class="badge"&gt;&#123;&#123;hero.id&#125;&#125;&lt;/span&gt; &#123;&#123;hero.name&#125;&#125;</span></span><br><span class="line"><span class="string">      &lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;/ul&gt;</span></span><br><span class="line"><span class="string">    &lt;hero-detail [hero]="selectedHero"&gt;&lt;/hero-detail&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<pre><code>判断的依据:
+- 当它出现在等号右侧的模板表达式中时，它属于模板所在的组件，不需要@Input装饰器。
+- 当它出现在等号左边的方括号（[ ]）中时，该属性属于其它组件或指令，它必须带有@Input 装饰器。
+</code></pre><h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><ul>
+<li>命名规范<br>  我们遵循的文件命名约定是：服务名称的小写形式（基本名），加上.service后缀。</li>
+<li><p>组件需要的两个服务设置为私有变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroService</span> </span>&#123;</span><br><span class="line">  private heroes: Hero[] = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(</span><br><span class="line">    private backend: BackendService,</span><br><span class="line">    private logger: Logger) &#123; &#125;</span><br><span class="line"></span><br><span class="line">  getHeroes() &#123;</span><br><span class="line">    <span class="keyword">this</span>.backend.getAll(Hero).then( <span class="function">(<span class="params">heroes: Hero[]</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.logger.log(<span class="string">`Fetched <span class="subst">$&#123;heroes.length&#125;</span> heroes.`</span>);</span><br><span class="line">      <span class="keyword">this</span>.heroes.push(...heroes); <span class="comment">// fill cache</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.heroes;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>异步调用的服务类型</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Injectable()</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroService</span> </span>&#123;</span><br><span class="line">  getHeroes(): <span class="built_in">Promise</span>&lt;Hero[]&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(HEROES);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  定义一个promise</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getHeroes(): <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.heroService.getHeroes().then(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="keyword">this</span>.heroes = heroes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  在组件当中对方法的实现，传入一个成功时候的回调函数，进行数据的设置</p>
+</li>
+</ul>
+<p>组件应当保持精简，同时应该将所有的操作都委托给服务去做，主要是为数据绑定提供属性和方法。</p>
+<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>使用依赖注入来提供组件所需要的服务解决依赖问题</p>
+<ul>
+<li>依赖注入有助于解决函数构建相互之间的依赖问题,同时使得类与依赖之间解耦,便于调试</li>
+<li>通过查看构造函数的参数类型得知组件需要那服务</li>
+<li>注入器维护了一个服务实例的容器，存放着以前创建的实例。 如果所请求的服务实例不在容器中，注入器就会创建一个服务实例，并且添加到容器中，然后把这个服务返回给 Angular。<br>关于服务，必须使用注入器为服务注册一个提供商</li>
+<li>注册在根模块，可以在任何地方都使用同一个实例</li>
+<li>注册在元数据中的providers属性，表示是组件级别的服务，每一个组件的实例都会有一个新的服务实例</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125;   <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Hero &#125;        <span class="keyword">from</span> <span class="string">'./hero'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125; <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'hero-list'</span>,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div *ngFor="let hero of heroes"&gt;</span></span><br><span class="line"><span class="string">    &#123;&#123;hero.id&#125;&#125; - &#123;&#123;hero.name&#125;&#125;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroListComponent</span> </span>&#123;</span><br><span class="line">  heroes: Hero[];</span><br><span class="line">  <span class="keyword">constructor</span>(heroService: HeroService) &#123;</span><br><span class="line">    <span class="keyword">this</span>.heroes = heroService.getHeroes();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将构造函数所需要的数据交给一个服务去完成,只需要调用服务的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HEROES &#125;     <span class="keyword">from</span> <span class="string">'./mock-heroes'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Logger &#125;     <span class="keyword">from</span> <span class="string">'../logger.service'</span>;</span><br><span class="line">@Injectable()</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroService</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(private logger: Logger) &#123;  &#125;</span><br><span class="line">  getHeroes() &#123;</span><br><span class="line">    <span class="keyword">this</span>.logger.log(<span class="string">'Getting heroes ...'</span>);</span><br><span class="line">    <span class="keyword">return</span> HEROES;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>出现多级依赖,将他所以需要的服务添加为私有属性,并在方法的定义中调用</p>
+<blockquote>
+<p>动态创建依赖值</p>
+</blockquote>
+<ul>
+<li>带依赖的类提供商(配置)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ UserService,</span><br><span class="line">  &#123; <span class="attr">provide</span>: Logger, <span class="attr">useClass</span>: EvenBetterLogger &#125;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>值提供商<br>对值进行配置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Copy Code</span><br><span class="line"><span class="keyword">export</span> interface AppConfig &#123;</span><br><span class="line">  apiEndpoint: string;</span><br><span class="line">  title: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> HERO_DI_CONFIG: AppConfig = &#123;</span><br><span class="line">  apiEndpoint: <span class="string">'api.heroes.com'</span>,</span><br><span class="line">  title: <span class="string">'Dependency Injection'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>注册依赖的提供商<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">providers: [&#123; <span class="attr">provide</span>: APP_CONFIG, <span class="attr">useValue</span>: HERO_DI_CONFIG &#125;]</span><br></pre></td></tr></table></figure></p>
+<p>之后将配置对象注入到需要他的构造函数当中去<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(@Inject(APP_CONFIG) config: AppConfig) &#123;</span><br><span class="line">  <span class="keyword">this</span>.title = config.title;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><ul>
+<li>每个表单的必须定义name属性，angular通过name来注册控件</li>
+<li>ng-valid | ng-invalid，对表单input的提示</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>Name<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"name"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">required</span></span></span><br><span class="line"><span class="tag">               [(<span class="attr">ngModel</span>)]=<span class="string">"model.name"</span> <span class="attr">name</span>=<span class="string">"name"</span></span></span><br><span class="line"><span class="tag">               #<span class="attr">name</span>=<span class="string">"ngModel"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> [<span class="attr">hidden</span>]=<span class="string">"name.valid || name.pristine"</span></span></span><br><span class="line"><span class="tag">             <span class="attr">class</span>=<span class="string">"alert alert-danger"</span>&gt;</span></span><br><span class="line">          Name is required</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意这里使用了模板应用变量,通过name是否有效(或者是全新,即没有任何输入的情况),来进行验证的前端判断</p>
+<p><img src="https://angular.cn/resources/images/devguide/forms/name-required-error.png" alt="photo"></p>
+<p>同时记得应清除标记</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> (<span class="attr">click</span>)=<span class="string">"newHero(); heroForm.reset()"</span>&gt;</span>New Hero<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="目录结构理解"><a href="#目录结构理解" class="headerlink" title="目录结构理解"></a>目录结构理解</h3><p>对一个angular应用的相应的模块加载和组件的应用</p>
+<ul>
+<li><p><code>app.component.ts</code> 应用的根组件,通过装饰器引入其他子组件</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'my-app'</span>,</span><br><span class="line">  template: <span class="string">'&lt;hero-form&gt;&lt;/hero-form&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>app.module.ts</code> 应用的根模块,通过<code>ngModule</code>,对应用的视图组件,主组件,引入的模块进行设置</p>
+</li>
+<li><p><code>hero-form.component.ts</code>,子模块,其中定义一个类,其中有数据成员的方法,可以通过其中绑定与视图进行联系</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Hero &#125;    <span class="keyword">from</span> <span class="string">'./hero'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'hero-form'</span>,</span><br><span class="line">  templateUrl: <span class="string">'./hero-form.component.html'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HeroFormComponent</span> </span>&#123;</span><br><span class="line">  powers = [<span class="string">'Really Smart'</span>, <span class="string">'Super Flexible'</span>,</span><br><span class="line">            <span class="string">'Super Hot'</span>, <span class="string">'Weather Changer'</span>];</span><br><span class="line">  model = <span class="keyword">new</span> Hero(<span class="number">18</span>, <span class="string">'Dr IQ'</span>, <span class="keyword">this</span>.powers[<span class="number">0</span>], <span class="string">'Chuck Overstreet'</span>);</span><br><span class="line">  submitted = <span class="literal">false</span>;</span><br><span class="line">  onSubmit() &#123; <span class="keyword">this</span>.submitted = <span class="literal">true</span>; &#125;</span><br><span class="line">  newHero() &#123;</span><br><span class="line">    <span class="keyword">this</span>.model = <span class="keyword">new</span> Hero(<span class="number">42</span>, <span class="string">''</span>, <span class="string">''</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="生命周期钩子"><a href="#生命周期钩子" class="headerlink" title="生命周期钩子"></a>生命周期钩子</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; OnInit &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> <span class="title">implements</span> <span class="title">OnInit</span> </span>&#123;</span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子当中,是为了保证构造函数功能的单一,因此将方法定义在模块的生命周期钩子中,当初始化时进行函数调用.</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ul>
+<li><p>在根模块引入抽离出来的路由模块</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">src/app/app-routing.module.ts</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; NgModule &#125;             <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; RouterModule, Routes &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; DashboardComponent &#125;   <span class="keyword">from</span> <span class="string">'./dashboard.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroesComponent &#125;      <span class="keyword">from</span> <span class="string">'./heroes.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-detail.component'</span>;</span><br><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">''</span>, <span class="attr">redirectTo</span>: <span class="string">'/dashboard'</span>, <span class="attr">pathMatch</span>: <span class="string">'full'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'dashboard'</span>,  <span class="attr">component</span>: DashboardComponent &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'detail/:id'</span>, <span class="attr">component</span>: HeroDetailComponent &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'heroes'</span>,     <span class="attr">component</span>: HeroesComponent &#125;</span><br><span class="line">];</span><br><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [ RouterModule.forRoot(routes) ],</span><br><span class="line">  exports: [ RouterModule ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppRoutingModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>  设置相对应的路映射的路由</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'my-app'</span>,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">     &lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</span></span><br><span class="line"><span class="string">     &lt;a routerLink="/heroes"&gt;Heroes&lt;/a&gt;</span></span><br><span class="line"><span class="string">     &lt;router-outlet&gt;&lt;/router-outlet&gt;</span></span><br><span class="line"><span class="string">   `</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  title = <span class="string">'Tour of Heroes'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  设置路由器组件，在导航组件当中使用<code>routerLink</code>进行url跳转，之后在底部添加router-outlet，相当于一个槽，导引相关子模块，可以有多个routerLink</p>
+</li>
+<li><p>配置带有参数的路由</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ActivatedRoute, Params &#125;   <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br></pre></td></tr></table></figure>
+<p>  然后注入ActivatedRoute和HeroService服务到构造函数中，将它们的值保存到私有变量中：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(</span><br><span class="line">  private heroService: HeroService,</span><br><span class="line">  private route: ActivatedRoute,</span><br><span class="line">  private location: Location</span><br><span class="line">) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>  然后再通过switchMap找到通过id映射的数据，在初始化的时候进行操作</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ngOnInit(): <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.route.params</span><br><span class="line">    .switchMap(<span class="function">(<span class="params">params: Params</span>) =&gt;</span> <span class="keyword">this</span>.heroService.getHero(+params[<span class="string">'id'</span>]))</span><br><span class="line">    .subscribe(<span class="function"><span class="params">hero</span> =&gt;</span> <span class="keyword">this</span>.hero = hero);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  之后需要将模板中的导航元素换乘a标签，同时绑定了<code>[routerLink]</code>属性，通过一个数组来确定映射到哪一个数据</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a *ngFor=<span class="string">"let hero of heroes"</span>  [routerLink]=<span class="string">"['/detail', hero.id]"</span>  <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-1-4"</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>交互跳转</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gotoDetail(): <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.router.navigate([<span class="string">'/detail'</span>, <span class="keyword">this</span>.selectedHero.id]);</span><br><span class="line">&#125;</span><br><span class="line">goBack(): <span class="keyword">void</span></span><br><span class="line">  <span class="keyword">this</span>.location.back();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="HTTP通信"><a href="#HTTP通信" class="headerlink" title="HTTP通信"></a>HTTP通信</h3><p>在根模块引入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; HttpModule &#125;    <span class="keyword">from</span> <span class="string">'@angular/http'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>实现相对应的功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; Headers, Http &#125; <span class="keyword">from</span> <span class="string">'@angular/http'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'rxjs/add/operator/toPromise'</span>;</span><br><span class="line"></span><br><span class="line">getHeroes(): <span class="built_in">Promise</span>&lt;Hero[]&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.http.get(<span class="keyword">this</span>.heroesUrl)</span><br><span class="line">             .toPromise()</span><br><span class="line">             .then(<span class="function"><span class="params">response</span> =&gt;</span> response.json().data <span class="keyword">as</span> Hero[])</span><br><span class="line">             .catch(<span class="keyword">this</span>.handleError);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现保存（http put方法）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private headers = <span class="keyword">new</span> Headers(&#123;<span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>&#125;);</span><br><span class="line">update(hero: Hero): <span class="built_in">Promise</span>&lt;Hero&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.heroesUrl&#125;</span>/<span class="subst">$&#123;hero.id&#125;</span>`</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.http</span><br><span class="line">    .put(url, <span class="built_in">JSON</span>.stringify(hero), &#123;<span class="attr">headers</span>: <span class="keyword">this</span>.headers&#125;)</span><br><span class="line">    .toPromise()</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> hero)</span><br><span class="line">    .catch(<span class="keyword">this</span>.handleError);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Observable-可观察对象"><a href="#Observable-可观察对象" class="headerlink" title="Observable(可观察对象)"></a>Observable(可观察对象)</h3><p>Http服务中的每个方法都返回一个 <code>HTTP Response</code>对象的<code>Observable</code>实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private searchTerms = <span class="keyword">new</span> Subject&lt;string&gt;();</span><br><span class="line"><span class="comment">// Push a search term into the observable stream.</span></span><br><span class="line">search(term: string): <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">this</span>.searchTerms.next(term);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中<code>Subject</code>是一个可观察事件流中的生产者,也是一个<code>Observable</code>对象</li>
+<li>每次调用<code>search</code>函数的时候都会把新的字符串放入该主题的可观察流当中</li>
+<li>当发起一个http请求的时候返回的也是一个可观察对象</li>
+</ul>
+<blockquote>
+<p>实现组件之间的通讯</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private missionAnnouncedSource = <span class="keyword">new</span> Subject&lt;string&gt;();</span><br><span class="line">private missionConfirmedSource = <span class="keyword">new</span> Subject&lt;string&gt;();</span><br><span class="line"><span class="comment">// Observable string streams</span></span><br><span class="line">missionAnnounced$ = <span class="keyword">this</span>.missionAnnouncedSource.asObservable();</span><br><span class="line">missionConfirmed$ = <span class="keyword">this</span>.missionConfirmedSource.asObservable();</span><br><span class="line"><span class="comment">// Service message commands</span></span><br><span class="line">announceMission(mission: string) &#123;</span><br><span class="line">  <span class="keyword">this</span>.missionAnnouncedSource.next(mission);</span><br><span class="line">&#125;</span><br><span class="line">confirmMission(astronaut: string) &#123;</span><br><span class="line">  <span class="keyword">this</span>.missionConfirmedSource.next(astronaut);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用一个独立的服务作为共享数据的服务,通过服务注入得到实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(private missionService: MissionService) &#123;</span><br><span class="line">   missionService.missionConfirmed$.subscribe(</span><br><span class="line">     astronaut =&gt; &#123;</span><br><span class="line">       <span class="keyword">this</span>.history.push(<span class="string">`<span class="subst">$&#123;astronaut&#125;</span> confirmed the mission`</span>);</span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过调用服务当中的<code>subject</code>对象进行订阅,并设置回调函数,发生变化时自动更新</li>
+<li>可以将订阅的<code>subscription</code>保存下来,在组件销毁的时候进行调用</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/react-learning/" rel="next" title="react-learning">
+                <i class="fa fa-chevron-left"></i> react-learning
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/05/javascript理解/" rel="prev" title="javascript理解">
+                javascript理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+        
+          <div id="gitment-container"></div>
+        
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://cramon.tk/guitar.png"
+                alt="cramon" />
+            
+              <p class="site-author-name" itemprop="name">cramon</p>
+              <p class="site-description motion-element" itemprop="description">SHARE and LEARN</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#angular2"><span class="nav-number">1.</span> <span class="nav-text">angular2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块"><span class="nav-number">1.1.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件（视图）"><span class="nav-number">1.2.</span> <span class="nav-text">组件（视图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板"><span class="nav-number">1.3.</span> <span class="nav-text">模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据"><span class="nav-number">1.4.</span> <span class="nav-text">元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据绑定"><span class="nav-number">1.5.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">1.6.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务"><span class="nav-number">1.7.</span> <span class="nav-text">服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">1.8.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单"><span class="nav-number">1.9.</span> <span class="nav-text">表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构理解"><span class="nav-number">1.10.</span> <span class="nav-text">目录结构理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期钩子"><span class="nav-number">1.11.</span> <span class="nav-text">生命周期钩子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">1.12.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP通信"><span class="nav-number">1.13.</span> <span class="nav-text">HTTP通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Observable-可观察对象"><span class="nav-number">1.14.</span> <span class="nav-text">Observable(可观察对象)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cramon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'cramonde',
+            repo: 'cramonDE.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '69c7ff02d1715959047a1c9c315f41060131ae31',
+            
+                client_id: '256b114a4f4404be61ff'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

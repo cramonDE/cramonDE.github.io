@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="新浪微博数据爬取简单获取微博平台的相关数据,项目源码地址: github 平台和使用的工具及语言  linux ubuntu17.04 python 2.7 selenium（包含相应的firefox扩展）  mysql和phpmyadmin图形化界面管理工具    文件内容及目录  forward_ twice.py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新浪微博数据爬取">
+<meta property="og:url" content="https://cramonde.github.io/2018/01/05/新浪微博数据爬取/index.html">
+<meta property="og:site_name" content="cramon BLOG">
+<meta property="og:description" content="新浪微博数据爬取简单获取微博平台的相关数据,项目源码地址: github 平台和使用的工具及语言  linux ubuntu17.04 python 2.7 selenium（包含相应的firefox扩展）  mysql和phpmyadmin图形化界面管理工具    文件内容及目录  forward_ twice.py 通过具体的特殊实例，分析某一条微博，获取其二次转发的数量以及博主的粉丝数 se">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://cramonde.github.io/2018/01/05/新浪微博数据爬取/1495129494291.png">
+<meta property="og:updated_time" content="2018-04-22T06:19:13.140Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新浪微博数据爬取">
+<meta name="twitter:description" content="新浪微博数据爬取简单获取微博平台的相关数据,项目源码地址: github 平台和使用的工具及语言  linux ubuntu17.04 python 2.7 selenium（包含相应的firefox扩展）  mysql和phpmyadmin图形化界面管理工具    文件内容及目录  forward_ twice.py 通过具体的特殊实例，分析某一条微博，获取其二次转发的数量以及博主的粉丝数 se">
+<meta name="twitter:image" content="https://cramonde.github.io/2018/01/05/新浪微博数据爬取/1495129494291.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cramonde.github.io/2018/01/05/新浪微博数据爬取/"/>
+
+
+
+
+
+  <title>新浪微博数据爬取 | cramon BLOG</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cramon BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cramonde.github.io/2018/01/05/新浪微博数据爬取/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cramon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://cramon.tk/guitar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cramon BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">新浪微博数据爬取</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T00:18:41+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/05/新浪微博数据爬取/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/05/新浪微博数据爬取/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="新浪微博数据爬取"><a href="#新浪微博数据爬取" class="headerlink" title="新浪微博数据爬取"></a>新浪微博数据爬取</h1><p>简单获取微博平台的相关数据,项目源码地址: <a href="https://github.com/cramonDE/weibo_spider" target="_blank" rel="noopener">github</a></p>
+<h2 id="平台和使用的工具及语言"><a href="#平台和使用的工具及语言" class="headerlink" title="平台和使用的工具及语言"></a>平台和使用的工具及语言</h2><blockquote>
+<ul>
+<li>linux ubuntu17.04</li>
+<li>python 2.7</li>
+<li><p>selenium（包含相应的firefox扩展）</p>
+</li>
+<li><p>mysql和phpmyadmin图形化界面管理工具</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="文件内容及目录"><a href="#文件内容及目录" class="headerlink" title="文件内容及目录"></a>文件内容及目录</h2><p><img src="./1495129494291.png" alt="Alt text"></p>
+<ul>
+<li>forward_ twice.py 通过具体的特殊实例，分析某一条微博，获取其二次转发的数量以及博主的粉丝数</li>
+<li><p>searchFans.py 另外写的一个小程序，通过数据库操作获取微博博主的主页url，增加爱博主的粉丝数目</p>
+</li>
+<li><p>searchPage.py 对新的页面xpath获取所需元素的测试</p>
+</li>
+<li><p>spider_mysql_nofans.py 不同时获取微博博主的粉丝数加快爬取的速度</p>
+</li>
+<li>spider_MySQL 使用python操作数据库的测试</li>
+<li>weibo_spider_search.py 比价全面，可以同时获取相关话题微博的昵称，主页，微博内容，发布时间，微博认证，转发，评论，赞，粉丝数</li>
+</ul>
+<h2 id="原理及实现"><a href="#原理及实现" class="headerlink" title="原理及实现"></a>原理及实现</h2><blockquote>
+<p>数据爬取</p>
+</blockquote>
+<ol>
+<li>使用selenium这个工具所提供的api去模拟浏览器的操作，通过url访问拿到数据</li>
+<li>之后用xpath对目标元素进行定位，找到所需要的数据</li>
+<li>之后对数据进行一个简答的字符串处理，得到所需要的格式</li>
+</ol>
+<blockquote>
+<p>数据库操作</p>
+</blockquote>
+<ol>
+<li>使用mysql对数据做一个持久话保存</li>
+<li>使用phpmyadmin对数据库表格的内容进行操作，排序，切割表之后按照需要导出excel文件</li>
+</ol>
+<blockquote>
+<p>实际例子</p>
+</blockquote>
+<p><strong>查找相关话题下的所有讨论的微博</strong></p>
+<ol>
+<li>通过selenium模拟浏览器进行表单提交的操作，输入用户名和密码，点击登录，设置已登录的cookie</li>
+<li>在s.weibo.com这个网址进行表单提交，输入查找的关键词</li>
+<li>使用xpath定位每一条微博</li>
+<li>再通过xpath具体定位到每一条微博里面所需要的数据项，写进数据库</li>
+<li>运行查找粉丝的脚本，访问转发量最大的数据中的前100条微博的博主的微博，再写进数据库中</li>
+<li>在phpmyadmin进行操作，按照转发量降序排列，之后通过转发量最大的数据项，用其发布时间，将整个数据库表按照时间先后顺序进行分割，可以判断事件发生的前后的公共事件的关注度</li>
+</ol>
+<p><strong>查找原始微博下方所有数据的整合，包含二次转发和点赞</strong></p>
+<ol>
+<li>通过selenium模拟浏览器进行表单提交的操作，输入用户名和密码，点击登录，设置已登录的cookie</li>
+<li>访问所给的原微博的url</li>
+<li>找到所有人的转发和评论记录，然后根据需要再细致的定位到某一个元素中获取相关信息，写进数据库中</li>
+<li>运行查找粉丝的脚本，访问转发量最大的数据中的前100条微博的博主的微博，再写进数据库中</li>
+</ol>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><p>代码的总体框架参考了这篇博客,感谢博主的思路<br> <a href="http://blog.csdn.net/destinyuan/article/details/51297528" target="_blank" rel="noopener">传送门</a><br>在这里主要对spider_mysql.py这个文件进行分析,其他文件也是同理,针对不同页面,但原理是一样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">defaultencoding = <span class="string">'utf-8'</span></span><br><span class="line"><span class="keyword">if</span> sys.getdefaultencoding() != defaultencoding:</span><br><span class="line">    reload(sys)</span><br><span class="line">    sys.setdefaultencoding(defaultencoding)</span><br><span class="line"></span><br><span class="line">driver = webdriver.Firefox()</span><br></pre></td></tr></table></figure>
+<p>在文件的开头指定的默认字符编码,python默认是不支持中文的,加上使用mysql操作,插入数据也是要使用utf-8编码,所以现在这里指定使用utf-8编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">        <span class="comment">#输入用户名/密码登录</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'准备登陆Weibo.cn网站...'</span></span><br><span class="line">        driver.get(<span class="string">"http://login.sina.com.cn/"</span>)</span><br><span class="line">        elem_user = driver.find_element_by_name(<span class="string">"username"</span>)</span><br><span class="line">        elem_user.send_keys(username) <span class="comment">#用户名</span></span><br><span class="line">        elem_pwd = driver.find_element_by_name(<span class="string">"password"</span>)</span><br><span class="line">        elem_pwd.send_keys(password)  <span class="comment">#密码</span></span><br><span class="line">        elem_sub = driver.find_element_by_xpath(<span class="string">"//input[@class='W_btn_a btn_34px']"</span>)</span><br><span class="line">        elem_sub.click()              <span class="comment">#点击登陆 因无name属性</span></span><br><span class="line"></span><br><span class="line">        time.sleep(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception,e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Error: "</span>,e</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'End LoginWeibo!\n'</span></span><br></pre></td></tr></table></figure>
+<p>登录的方式是简单的获取输入框并点击”登录”按钮,这里设置的延迟主要是等待服务器响应,设置cookie,记录登录信息(微博某些信息需要登录才能显示)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handlePage</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> numOFItem</span><br><span class="line">    numOFItem = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"></span><br><span class="line">        time.sleep(random.random() * <span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">        <span class="comment">#先行判定是否有内容</span></span><br><span class="line">        <span class="keyword">if</span> checkContent():</span><br><span class="line"></span><br><span class="line">            getContent()</span><br><span class="line">            <span class="comment">#先行判定是否有下一页按钮</span></span><br><span class="line">            <span class="keyword">if</span> checkNext():</span><br><span class="line">                <span class="keyword">print</span> <span class="string">"下一页"</span></span><br><span class="line">                <span class="comment">#拿到下一页按钮</span></span><br><span class="line">                next_page_btn = driver.find_element_by_xpath(<span class="string">"//a[@class='page next S_txt1 S_line1']"</span>)</span><br><span class="line">                next_page_btn.click()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">"已达到最后一页"</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"该页面没有数据"</span></span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p>对页面的获取是一个循环,按页进行加载,也跟我们平时浏览页面一样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initDatabase</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化数据库对应操作</span></span><br><span class="line">    <span class="keyword">global</span> coon</span><br><span class="line">    conn = pymysql.connect(host=<span class="string">"127.0.0.1"</span>, port=<span class="number">3306</span>,</span><br><span class="line">    user=<span class="string">'root'</span>, passwd=<span class="string">'xiaomixm'</span>, db=<span class="string">'spider'</span>, charset=<span class="string">'utf8mb4'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> cur</span><br><span class="line">    cur = conn.cursor()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#建表</span></span><br><span class="line"></span><br><span class="line">    sql = <span class="string">'CREATE TABLE '</span> + key + <span class="string">'(博主昵称 char(200), 博主主页 char(200), 微博内容 varchar(10000), 微博认证 char(20), 发布时间 char(20), 转发 int(8), 评论 int(8), 赞 int(8), 粉丝数 int(8)) character set = utf8mb4'</span></span><br><span class="line">    cur.execute(sql)</span><br><span class="line">    cur.connection.commit()</span><br></pre></td></tr></table></figure></p>
+<p>对数据库进行建表,并设置相关信息,注意这里的字符编码不仅仅是utf-8,而应该是utf8mb4,因为在微博正文中,有些博主会发特殊的表情或者符号,他们是三个字节的字符,如果仅仅是utf-8编码的话,插入数据库会报错<br>这里的问题参考:<br><a href="https://my.oschina.net/leejun2005/blog/343353" target="_blank" rel="noopener">python对字符编码的处理</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writeDatabase</span><span class="params">(dic)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> cur</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(len(dic)):</span><br><span class="line"></span><br><span class="line">        sql = <span class="string">'INSERT INTO '</span> + key + <span class="string">'(博主昵称, 博主主页, 微博内容, 微博认证 , 发布时间, 转发, 评论, 赞, 粉丝数) VALUES ('</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(dic[k])):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                sql += <span class="string">'\''</span> + dic[k][i] + <span class="string">'\''</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                sql += <span class="string">', \''</span> + dic[k][i] + <span class="string">'\''</span></span><br><span class="line"></span><br><span class="line">        sql += <span class="string">')'</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            cur.execute(sql)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            sql = <span class="string">'INSERT INTO '</span> + key + <span class="string">'(博主昵称, 博主主页, 微博内容, 微博认证 , 发布时间, 转发, 评论, 赞, 粉丝数) VALUES ('</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(dic[k])):</span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                    sql += <span class="string">'\"'</span> + dic[k][i] + <span class="string">'\"'</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    sql += <span class="string">', "'</span> + dic[k][i] + <span class="string">'\"'</span></span><br><span class="line"></span><br><span class="line">            sql += <span class="string">')'</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                cur.execute(sql)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="keyword">print</span> sql</span><br><span class="line">        cur.connection.commit()</span><br></pre></td></tr></table></figure>
+<p>这一部分是数据库的插入操作,自认为写的不够优雅,但是后面懒得改了,默认将所有数据转化成字符串输入, 有可能存在sql注入的问题,所以对问题数据打印出来,再手动插入到数据库中,而不是在这里做一个统一的处理<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">            WBRZ = nodes[i].find_element_by_xpath(<span class="string">".//div[@class='feed_content wbcon']/a[@class='W_icon icon_approve']"</span>).get_attribute(<span class="string">'title'</span>)<span class="comment">#若没有认证则不存在节点</span></span><br><span class="line">            <span class="keyword">print</span> WBRZ</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            WBRZ = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> WBRZ == <span class="string">''</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                WBRZ = nodes[i].find_element_by_xpath(<span class="string">".//div[@class='feed_content wbcon']/a[@class='W_icon icon_approve_co']"</span>).get_attribute(<span class="string">'title'</span>)<span class="comment">#若没有认证则不存在节点</span></span><br><span class="line">                <span class="keyword">print</span> WBRZ</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                WBRZ = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> WBRZ == <span class="string">''</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                WBRZ = nodes[i].find_element_by_xpath(<span class="string">".//div[@class='feed_content wbcon']/a[@class='W_icon icon_approve_gold']"</span>).get_attribute(<span class="string">'title'</span>)<span class="comment">#若没有认证则不存在节点</span></span><br><span class="line">                WBRZ += <span class="string">'(gold)'</span></span><br><span class="line">                <span class="keyword">print</span> WBRZ</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                WBRZ = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># print '微博认证:', WBRZ</span></span><br><span class="line">        dic[i].append(WBRZ)</span><br></pre></td></tr></table></figure></p>
+<p>后面是单独对信息的获取,这个可以通过测试文件检验xpath能否获取到所需要的元素,这里注明一下微博认证是一个坑,有三种不同类型的微博认证,因此只能一个一个得进行判断<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(fansPage)) :</span><br><span class="line">        url = fansPage[i]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            driver.get(url)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            driver.execute_script(<span class="string">'window.stop()'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (dic[i][<span class="number">3</span>] == <span class="string">"微博机构认证"</span>):</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"jigou"</span></span><br><span class="line">            searchEMs = <span class="string">"//td[@class='S_line1']"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            searchEMs = <span class="string">"//a[@class='t_link S_txt1']"</span></span><br><span class="line">        <span class="keyword">if</span> (dic[i][<span class="number">3</span>] == <span class="string">"微博个人认证(gold)"</span>):</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"gold"</span></span><br><span class="line">            searchEM = <span class="string">".//strong[@class='W_f14']"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            searchEM = <span class="string">".//strong[@class='W_f18']"</span></span><br><span class="line">        FANS = driver.find_elements_by_xpath(searchEMs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            FAN = FANS[<span class="number">1</span>].find_element_by_xpath(searchEM).text</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line"></span><br><span class="line">            driver.execute_script(<span class="string">'window.location.reload()'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            FANS = driver.find_elements_by_xpath(searchEMs)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                FAN = FANS[<span class="number">1</span>].find_element_by_xpath(searchEM).text</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                time.sleep(<span class="number">3</span>)</span><br><span class="line">                FANS = driver.find_elements_by_xpath(searchEMs)</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    FAN = FANS[<span class="number">1</span>].find_element_by_xpath(searchEM).text</span><br><span class="line">                <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                    searchEM = <span class="string">".//strong[@class='W_f16']"</span></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        FAN = FANS[<span class="number">1</span>].find_element_by_xpath(searchEM).text</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        searchEM = <span class="string">".//strong[@class='W_f14']"</span></span><br><span class="line">                        <span class="keyword">try</span>:</span><br><span class="line">                            FAN = FANS[<span class="number">1</span>].find_element_by_xpath(searchEM).text</span><br><span class="line">                        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                            searchEM = <span class="string">".//strong[@class='W_f12']"</span></span><br><span class="line">                            <span class="keyword">try</span>:</span><br><span class="line">                                FAN = FANS[<span class="number">1</span>].find_element_by_xpath(searchEM).text</span><br><span class="line">                            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                                FAN = <span class="number">0</span></span><br><span class="line">        <span class="keyword">print</span> FAN</span><br><span class="line">        dic[i].append(str(FAN))</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        driver.get(current_url)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        driver.execute_script(<span class="string">'window.stop()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这一部分是获取微博的博主粉丝.具体原理是获取当前也所有的url存到一个数组当中,然后在整个页面读取完了之后,产生一个”中断”,访问这些url,获取粉丝数并记录,之后再回到当前的地址.这一部分也是遇到的坑比较多,而程序在这部分花的时间也是比较多,后面直接去掉了这部分,在数据库操作之后再获取想要的前100个博主的粉丝数,节省爬虫运行的时间.这里坑的地方主要有三个:</p>
+<ul>
+<li>主页页面响应的问题,有时候会莫名奇妙没有渲染出粉丝数,这种情况刷新一下页面就可以</li>
+<li>微博粉丝数的节点跟微博认证是有关系的,之间的相互关系比较乱,我也没有区分,直接获取和判断</li>
+<li>页面响应时间过长,有时候已经加载完所需要的数据但页面采集还没开始,selenium默认是在页面渲染完才开始进行数据采集,所以设置了页面超时,超过这个时间自动中止页面响应并获取数据.<blockquote>
+<p>这块地方使用解析数据包的方法可以很容易的获取粉丝数</p>
+</blockquote>
+</li>
+</ul>
+<p>##特点</p>
+<ul>
+<li><strong>使用selenium进行模拟浏览器的操作</strong></li>
+</ul>
+<p>使用python进行数据爬取一个难点是爬取页面的登录问题，需要用户登录发送cookie记录，服务端找到登录状态，才能显示全部信息， 如果按照其他python爬虫的方法，无论是用urllib的库，还是用scrapy，都必须要解决登录问题，通过相关微博了解了一下，对用户名使用base64加密，同时对于密码使用非对称加密，需要通过发送请求得到相关的6个字段，然后在对应进行加密后发送请求，然后才能进行数据爬取，实现的难度较大。因此采用模拟浏览器的方法，在浏览器中获取输入框，输入用户名和密码，这样就可以解决登录的问题</p>
+<ul>
+<li><strong>使用mysql进行相关数据库的操作</strong></li>
+</ul>
+<p>爬取数据之后，需要对我们需要的字段进行分析统计排序等等的操作， 因此采用mysql和phpmyadmin对数据进行排序，同时导出相应的格式，其中在写进数据库的过程中，有一些正文数据使用了扩展的utf-8编码（3个字节），因此数据库表的编码应该是utf8mb4，才能将数据正确插入</p>
+<ul>
+<li><strong>程序健壮性</strong></li>
+</ul>
+<p>代码基本上实现了所需要的功能，在数据爬取方面做了相应的阻塞延时，同时访问页面也采用随机延时的方法，去防止被检测使用爬虫程序。对其他非法字符或者编码原因导致插入数据错误的sql语句，也会输出，再手动将数据插入数据库。 不可避免的有时候因为网络原因或者服务器响应的问题，会导致页面渲染出错或者其他原因导致程序中止，发生的概率较少吗，已经爬取的数据不会丢失，也会将中止的url输出，方便从中断的地方再重新爬取数据</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/javascript理解/" rel="next" title="javascript理解">
+                <i class="fa fa-chevron-left"></i> javascript理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/05/测试/" rel="prev" title="测试">
+                测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+        
+          <div id="gitment-container"></div>
+        
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://cramon.tk/guitar.png"
+                alt="cramon" />
+            
+              <p class="site-author-name" itemprop="name">cramon</p>
+              <p class="site-description motion-element" itemprop="description">SHARE and LEARN</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新浪微博数据爬取"><span class="nav-number">1.</span> <span class="nav-text">新浪微博数据爬取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#平台和使用的工具及语言"><span class="nav-number">1.1.</span> <span class="nav-text">平台和使用的工具及语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件内容及目录"><span class="nav-number">1.2.</span> <span class="nav-text">文件内容及目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理及实现"><span class="nav-number">1.3.</span> <span class="nav-text">原理及实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码部分"><span class="nav-number">1.4.</span> <span class="nav-text">代码部分</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cramon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'cramonde',
+            repo: 'cramonDE.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '69c7ff02d1715959047a1c9c315f41060131ae31',
+            
+                client_id: '256b114a4f4404be61ff'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一面 网易大厦技术栈：react（es5）+jquery  数据结构 二叉树基础知识点 算法描述：如何将链表反向  数据库 mysql和mongodb的区别，底层实现的原理（简历当中提及） 简单的sql语句  前端 JavaScript基本数据类型 语义化标签 块级元素行内元素 VIsibility：collapsed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网易游戏前端开发岗面经">
+<meta property="og:url" content="https://cramonde.github.io/2018/01/05/网易游戏前端开发岗面经/index.html">
+<meta property="og:site_name" content="cramon BLOG">
+<meta property="og:description" content="一面 网易大厦技术栈：react（es5）+jquery  数据结构 二叉树基础知识点 算法描述：如何将链表反向  数据库 mysql和mongodb的区别，底层实现的原理（简历当中提及） 简单的sql语句  前端 JavaScript基本数据类型 语义化标签 块级元素行内元素 VIsibility：collapsed和display：none的区别 Jquery和es5（并不熟悉） angula">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-22T06:19:13.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网易游戏前端开发岗面经">
+<meta name="twitter:description" content="一面 网易大厦技术栈：react（es5）+jquery  数据结构 二叉树基础知识点 算法描述：如何将链表反向  数据库 mysql和mongodb的区别，底层实现的原理（简历当中提及） 简单的sql语句  前端 JavaScript基本数据类型 语义化标签 块级元素行内元素 VIsibility：collapsed和display：none的区别 Jquery和es5（并不熟悉） angula">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cramonde.github.io/2018/01/05/网易游戏前端开发岗面经/"/>
+
+
+
+
+
+  <title>网易游戏前端开发岗面经 | cramon BLOG</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cramon BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cramonde.github.io/2018/01/05/网易游戏前端开发岗面经/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cramon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://cramon.tk/guitar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cramon BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网易游戏前端开发岗面经</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T00:20:04+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/personal/" itemprop="url" rel="index">
+                    <span itemprop="name">personal</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/05/网易游戏前端开发岗面经/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/05/网易游戏前端开发岗面经/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><blockquote>
+<p>网易大厦<br>技术栈：react（es5）+jquery</p>
+</blockquote>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ul>
+<li>二叉树基础知识点</li>
+<li>算法描述：如何将链表反向</li>
+</ul>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>mysql和mongodb的区别，底层实现的原理（简历当中提及）</li>
+<li>简单的sql语句</li>
+</ul>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><ul>
+<li>JavaScript基本数据类型</li>
+<li>语义化标签</li>
+<li>块级元素行内元素</li>
+<li>VIsibility：collapsed和display：none的区别</li>
+<li>Jquery和es5（并不熟悉）</li>
+<li>angular两个版本的理解，angular2脚手架干了什么事情</li>
+<li>react数据流的理解</li>
+</ul>
+<h3 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h3><ul>
+<li>项目当中遇到什么问题，是怎么解决的</li>
+<li>学习前端的方法</li>
+<li>看过什么书</li>
+</ul>
+<blockquote>
+<p>面试的内容比较中规中矩，但是准备的不好，相关的数据结构和数据库的内容都没有准备，准备网易的面试一定要注重全栈，前端部分有些基本问题没有答好，对jq也不太熟悉，所以一面就挂了</p>
+</blockquote>
+<h2 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h2><blockquote>
+<p>侨鑫大厦<br>技术栈：前端是angular后台是go语言及其它微服务架构</p>
+</blockquote>
+<h3 id="算法题"><a href="#算法题" class="headerlink" title="算法题"></a>算法题</h3><ul>
+<li>广搜算法</li>
+<li>另一道题目类似聪明题，观察规律，按要求完成<h3 id="数据库-1"><a href="#数据库-1" class="headerlink" title="数据库"></a>数据库</h3></li>
+<li>如何在高并发情况下实现redis数据库表当中字段的更改，而用户不会察觉</li>
+</ul>
+<p>个人感觉该题目如果没有在项目当中经历过比较难答的好，主要是数据库安全和相应的容灾策略的问题，大概原理是懂的但是不好表述，也没有这方面的经验</p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><ul>
+<li>cookie和session的理解（简历当中提及的项目经历）</li>
+<li>关于cookie和session带来的安全问题如何防范（csrf问题）</li>
+</ul>
+<blockquote>
+<p>一面完全没有问到关于前端的知识，可见网易游戏对全栈的要求比较高，算法题其实不难，但主要是在紧张的环境下怎么去思考问题，找到最合适的解决方法，比较考察思维能力。数据库的话，最好是关系型和非关系型都懂，哪一种数据库就无所谓</p>
+</blockquote>
+<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
+<li>命令行版本的扫雷</li>
+</ul>
+<p>跟贪吃蛇的写法差不多，主要是流程控制，具体实现就根据扫雷的规则，重点应该是地图的重绘和状态的保存，考察的算法是广搜。感觉面试官考察的是对整个项目怎么实现的思路，和相关函数的定义</p>
+<h3 id="前端-1"><a href="#前端-1" class="headerlink" title="前端"></a>前端</h3><ul>
+<li>angular1.x和angular5的差别</li>
+<li>对angular5的理解和数据流通的方式</li>
+<li>服务存在的形式</li>
+<li>项目当中遇到了最难的问题是什么，怎么解决（我回答了angular组件之间通信的方式，还有websocket的封装和构建，在websocket这块探讨的比较深入，相关的原理和实现方法）</li>
+<li>rxjs相关（observable的传递方式，因为比较熟悉的是使用subject，对直接传递observable没做了解）</li>
+</ul>
+<blockquote>
+<p>二面对前端的东西问的比较深入，基本上如果没有实际的项目开发经历的话很难水过去，一些问题只有在实际开发过程中才会有比较深入的思考和体会，其实面试官主要是考察你的思考能力，和自己的一些理解。</p>
+</blockquote>
+<h2 id="三面"><a href="#三面" class="headerlink" title="三面"></a>三面</h2><h3 id="算法题-1"><a href="#算法题-1" class="headerlink" title="算法题"></a>算法题</h3><ul>
+<li>实现一个复杂链表的复制函数（链表当中的节点除了有指向下一个节点的指针，还有一个指针指向一个任意的节点）</li>
+</ul>
+<p>思考的时间花了挺久，只想到最基本的实现方式，暴力求解，可能考察的是对指针和链表结构的内容吧</p>
+<h3 id="前端-2"><a href="#前端-2" class="headerlink" title="前端"></a>前端</h3><ul>
+<li>angular1.x和angular5的区别</li>
+<li>angular服务单例的理解（懒加载情况下服务的是否是单例）</li>
+</ul>
+<h3 id="数据库-2"><a href="#数据库-2" class="headerlink" title="数据库"></a>数据库</h3><ul>
+<li>锁的机制</li>
+<li>乐观锁和悲观锁</li>
+</ul>
+<h3 id="后台"><a href="#后台" class="headerlink" title="后台"></a>后台</h3><ul>
+<li>如何分配内存更加的高效</li>
+</ul>
+<p>这个问题其实我也没懂面试官问的什么意思，所以面试的过程也是从各个方面去寻找问题的答案，应该是关于操作系统内存池方面的知识，我回答的是关于内存分配的策略，以及分页分段，在内存当中构建映射表，以链表的方式将分配的内存联系起来，通过表中的映射关系查找内存对应的地址。</p>
+<blockquote>
+<p>三面感觉是压力面试，面试官的级别也会比较高，而且面试时间比较短，尽量不要在思考过程当中浪费太多时间消耗面试官的耐心。</p>
+</blockquote>
+<h2 id="hr面"><a href="#hr面" class="headerlink" title="hr面"></a>hr面</h2><blockquote>
+<p>主要是对你个人性格的了解，相关的社团经历，只要你表现出个性开朗，善于团队协作，不断学习不断进步就没问题了，形式的话是电话面试，大概就十几分钟。</p>
+</blockquote>
+<h2 id="个人感受"><a href="#个人感受" class="headerlink" title="个人感受"></a>个人感受</h2><p>在面试网易游戏的期间我也参加了一些小公司的面试，因为我是前端开发岗，问的问题都是比较基础的，就是网上的那些题目。但是网易游戏比较看中个人的全栈能力，所以数据库方法和相关的算法一定要过关，而且面试的时候当场打代码也是比较考验个人的心理素质吧，感觉跟期末机考的时候差不多。个人认为前端应该比较注重自己的项目经历，面试的很多问题也是在项目经历当中谈及，对于自己的项目经历可以在简历当中设问，比较有针对性。四面之后，兜兜转转一个星期才发了offer，感觉运气的成分也很大，很感谢师兄师姐的帮助和建议，共勉！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/测试/" rel="next" title="测试">
+                <i class="fa fa-chevron-left"></i> 测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/18/typescript/" rel="prev" title="typescript理解">
+                typescript理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+        
+          <div id="gitment-container"></div>
+        
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://cramon.tk/guitar.png"
+                alt="cramon" />
+            
+              <p class="site-author-name" itemprop="name">cramon</p>
+              <p class="site-description motion-element" itemprop="description">SHARE and LEARN</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一面"><span class="nav-number">1.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">1.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">1.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端"><span class="nav-number">1.3.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目相关"><span class="nav-number">1.4.</span> <span class="nav-text">项目相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一面-1"><span class="nav-number">2.</span> <span class="nav-text">一面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法题"><span class="nav-number">2.1.</span> <span class="nav-text">算法题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库-1"><span class="nav-number">2.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端"><span class="nav-number">2.3.</span> <span class="nav-text">服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二面"><span class="nav-number">3.</span> <span class="nav-text">二面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">3.1.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端-1"><span class="nav-number">3.2.</span> <span class="nav-text">前端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三面"><span class="nav-number">4.</span> <span class="nav-text">三面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法题-1"><span class="nav-number">4.1.</span> <span class="nav-text">算法题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端-2"><span class="nav-number">4.2.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库-2"><span class="nav-number">4.3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台"><span class="nav-number">4.4.</span> <span class="nav-text">后台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hr面"><span class="nav-number">5.</span> <span class="nav-text">hr面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人感受"><span class="nav-number">6.</span> <span class="nav-text">个人感受</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cramon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'cramonde',
+            repo: 'cramonDE.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '69c7ff02d1715959047a1c9c315f41060131ae31',
+            
+                client_id: '256b114a4f4404be61ff'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
