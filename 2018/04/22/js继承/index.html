@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="浏览器的回流与重绘 回流必将引起重绘，重绘不一定引起回流  导致回流的操作 页面首次渲染 浏览器窗口大小发生改变 元素尺寸或位置发生改变 元素内容变化（文字数量或图片大小等等） 元素字体大小变化 添加或者删除可见的DOM元素 激活CSS伪类（例如：:hover） 查询某些属性或调用某些方法  导致回流的属性和方法 cl">
+<meta name="description" content="2018腾讯春招实习生面试 时间：2018-3-14bg：sng-qq空间前端  项目和框架 是否阅读过源码：对angular1的digest循环进行解释 框架的理解，为何选择这类框架，底层实现的机制，mvvm的理解 虚拟dom，设计虚拟dom的diff算法 比较两棵dom树  深度优先遍历，定义差异的类型（修改节点属">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js继承">
 <meta property="og:url" content="https://cramonde.github.io/2018/04/22/js继承/index.html">
 <meta property="og:site_name" content="cramon BLOG">
-<meta property="og:description" content="浏览器的回流与重绘 回流必将引起重绘，重绘不一定引起回流  导致回流的操作 页面首次渲染 浏览器窗口大小发生改变 元素尺寸或位置发生改变 元素内容变化（文字数量或图片大小等等） 元素字体大小变化 添加或者删除可见的DOM元素 激活CSS伪类（例如：:hover） 查询某些属性或调用某些方法  导致回流的属性和方法 clientWidth、clientHeight、clientTop、clientL">
+<meta property="og:description" content="2018腾讯春招实习生面试 时间：2018-3-14bg：sng-qq空间前端  项目和框架 是否阅读过源码：对angular1的digest循环进行解释 框架的理解，为何选择这类框架，底层实现的机制，mvvm的理解 虚拟dom，设计虚拟dom的diff算法 比较两棵dom树  深度优先遍历，定义差异的类型（修改节点属性，修改节点文本内容，替换原有的节点，节点位置变化包括移动删除 记录差异  深度">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p1ievg6j8.bkt.clouddn.com/1524502792419.jpg">
 <meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/11/2012072810301161.png">
@@ -92,10 +92,10 @@
 <meta property="og:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/5951fd1efdb8068687df84e9ce87c69b.png">
 <meta property="og:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/12fd8bf0b621fdbbece8b0c4954eee42.png">
 <meta property="og:image" content="http://p1ievg6j8.bkt.clouddn.com/640%3Fwx_fmt=png&wxfrom=5&wx_lazy=1">
-<meta property="og:updated_time" content="2018-04-28T02:58:38.525Z">
+<meta property="og:updated_time" content="2018-05-18T02:44:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js继承">
-<meta name="twitter:description" content="浏览器的回流与重绘 回流必将引起重绘，重绘不一定引起回流  导致回流的操作 页面首次渲染 浏览器窗口大小发生改变 元素尺寸或位置发生改变 元素内容变化（文字数量或图片大小等等） 元素字体大小变化 添加或者删除可见的DOM元素 激活CSS伪类（例如：:hover） 查询某些属性或调用某些方法  导致回流的属性和方法 clientWidth、clientHeight、clientTop、clientL">
+<meta name="twitter:description" content="2018腾讯春招实习生面试 时间：2018-3-14bg：sng-qq空间前端  项目和框架 是否阅读过源码：对angular1的digest循环进行解释 框架的理解，为何选择这类框架，底层实现的机制，mvvm的理解 虚拟dom，设计虚拟dom的diff算法 比较两棵dom树  深度优先遍历，定义差异的类型（修改节点属性，修改节点文本内容，替换原有的节点，节点位置变化包括移动删除 记录差异  深度">
 <meta name="twitter:image" content="http://p1ievg6j8.bkt.clouddn.com/1524502792419.jpg">
 
 
@@ -348,7 +348,56 @@
       
 
       
-        <h3 id="浏览器的回流与重绘"><a href="#浏览器的回流与重绘" class="headerlink" title="浏览器的回流与重绘"></a>浏览器的回流与重绘</h3><blockquote>
+        <h2 id="2018腾讯春招实习生面试"><a href="#2018腾讯春招实习生面试" class="headerlink" title="2018腾讯春招实习生面试"></a>2018腾讯春招实习生面试</h2><blockquote>
+<p>时间：2018-3-14<br>bg：sng-qq空间前端</p>
+</blockquote>
+<h3 id="项目和框架"><a href="#项目和框架" class="headerlink" title="项目和框架"></a>项目和框架</h3><ul>
+<li>是否阅读过源码：对angular1的digest循环进行解释</li>
+<li>框架的理解，为何选择这类框架，底层实现的机制，mvvm的理解</li>
+<li><strong>虚拟dom，设计虚拟dom的diff算法</strong><ul>
+<li>比较两棵dom树<br>  深度优先遍历，定义差异的类型（修改节点属性，修改节点文本内容，替换原有的节点，节点位置变化包括移动删除</li>
+<li>记录差异<br>  深度遍历过程当中根据定义的修改操作，push进一个队列当中进行最小化修改</li>
+</ul>
+</li>
+</ul>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul>
+<li>强缓存和协商缓存的过程</li>
+<li>使用local storage储存用户输入的密码会有什么风险<br>  <strong>xss漏洞的攻击</strong></li>
+<li>Local storage储存首屏加载的css带来的问题<br>  <strong>前端首页加载的性能优化，如何更新css的问题</strong></li>
+<li>localstorage会引起xss漏洞的原因，怎么解决</li>
+</ul>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
+<li>回流和重绘的理解</li>
+<li>静态资源放在缓存当中如何接收更新：只回答了html5.manifest的内容（没有深入，大概是这个方向）</li>
+<li>如何提高前端的性能：<ul>
+<li>减少dom操作（问到了“获取dom的代码会有性能损耗吗”）</li>
+<li>减少http请求</li>
+<li>使用打包工具，jscss混淆压缩</li>
+<li>图片压缩</li>
+<li>Cdn内容分发</li>
+<li>使用缓存</li>
+<li>服务端方面提到了代理服务器和负载均衡机制</li>
+</ul>
+</li>
+</ul>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><ul>
+<li>使用async\await解决了什么问题</li>
+<li>使用promise带来的问题</li>
+<li>promise的参数</li>
+<li>使用Array(100).fill(1).map(function(x, index) {return index + 1}) 生成一个1-100的数组并每隔一秒输出</li>
+<li>对闭包的理解</li>
+<li>对原型链的理解</li>
+<li>用什么脚本判断是处于node环境还是浏览器环境</li>
+</ul>
+<h3 id="其他相关知识"><a href="#其他相关知识" class="headerlink" title="其他相关知识"></a>其他相关知识</h3><ul>
+<li>Tcp/ip有哪层http、dns、tcp在哪一层</li>
+<li>Mysql varchar和char的区别（只回答了长度区别，应该答一个可变，一个不可变）</li>
+<li>快排的过程，时间复杂度（nlogn, n^2），空间复杂度（logn，n）</li>
+<li>数组和链表的区别</li>
+</ul>
+<h3 id="个人感受"><a href="#个人感受" class="headerlink" title="个人感受"></a>个人感受</h3><p>面试流程的进度还是相当快的，投简历之后就是一面二面连续，其中二面的面试时间最长，也觉得收获比较大，提问的模式是树形的不断往深挖，面试官应该想考察对某些知识能够达到的深度，最好是能够有自己的思考，最好有一些亮点能够吸引面试官。可能是因为线上电话面试的原因，代码层面没有怎么考察，这部分是我比较薄弱的，因为我没有足够多的时间去刷题，对原生js仍旧不太熟悉。所幸面试官想考察的重点不是这里，应该是其他方面的基础，所以计算机相关的重要科目都应该大体的复习一遍。另外，项目经历当中，其实面试官并不是很感兴趣，主要是项目的深度和广度不够，要把握好自己项目当中的亮点，介绍给面试官。</p>
+<hr>
+<h3 id="浏览器的回流与重绘"><a href="#浏览器的回流与重绘" class="headerlink" title="浏览器的回流与重绘"></a>浏览器的回流与重绘</h3><blockquote>
 <p>回流必将引起重绘，重绘不一定引起回流</p>
 </blockquote>
 <h4 id="导致回流的操作"><a href="#导致回流的操作" class="headerlink" title="导致回流的操作"></a>导致回流的操作</h4><ul>
@@ -458,7 +507,7 @@
 <li>根据当前的session和用户id创建<code>token</code>，然后本页面当中所有post请求都应该携带这个<code>token</code></li>
 </ul>
 <h4 id="网站劫持"><a href="#网站劫持" class="headerlink" title="网站劫持"></a>网站劫持</h4><p>在数据传输的过程当中在缓存服务器或者其他中间服务器信息遭到泄漏，应该加密传输</p>
-<h3 id="CORS跨院资源共享"><a href="#CORS跨院资源共享" class="headerlink" title="CORS跨院资源共享"></a>CORS跨院资源共享</h3><h4 id="危害CSRF跨站请求伪造"><a href="#危害CSRF跨站请求伪造" class="headerlink" title="危害CSRF跨站请求伪造"></a>危害<strong>CSRF跨站请求伪造</strong></h4><p><img src="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/dd2d206d5afa78c483611418500872bc.png" alt=""></p>
+<h3 id="CORS跨域资源共享"><a href="#CORS跨域资源共享" class="headerlink" title="CORS跨域资源共享"></a>CORS跨域资源共享</h3><h4 id="危害CSRF跨站请求伪造"><a href="#危害CSRF跨站请求伪造" class="headerlink" title="危害CSRF跨站请求伪造"></a>危害<strong>CSRF跨站请求伪造</strong></h4><p><img src="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/dd2d206d5afa78c483611418500872bc.png" alt=""></p>
 <p>图中A和B就是不同域的资源。</p>
 <h4 id="CORS验证机制"><a href="#CORS验证机制" class="headerlink" title="CORS验证机制"></a>CORS验证机制</h4><p>出于安全原因，浏览器限制从脚本中发起的跨域HTTP请求。默认的安全限制为同源策略， 即JavaScript或Cookie只能访问同域下的内容。</p>
 <blockquote>
@@ -697,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器的回流与重绘"><span class="nav-number">1.</span> <span class="nav-text">浏览器的回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导致回流的操作"><span class="nav-number">1.1.</span> <span class="nav-text">导致回流的操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导致回流的属性和方法"><span class="nav-number">1.2.</span> <span class="nav-text">导致回流的属性和方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重绘"><span class="nav-number">1.3.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">1.4.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js继承"><span class="nav-number">2.</span> <span class="nav-text">js继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-shortcomings"><span class="nav-number">3.</span> <span class="nav-text">promise shortcomings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手四次挥手"><span class="nav-number">4.</span> <span class="nav-text">TCP三次握手四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用原生js实现Ajax请求"><span class="nav-number">5.</span> <span class="nav-text">使用原生js实现Ajax请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求"><span class="nav-number">5.1.</span> <span class="nav-text">http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http2-0"><span class="nav-number">5.2.</span> <span class="nav-text">http2.0</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全防范"><span class="nav-number">6.</span> <span class="nav-text">安全防范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS"><span class="nav-number">6.1.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF"><span class="nav-number">6.2.</span> <span class="nav-text">CSRF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站劫持"><span class="nav-number">6.3.</span> <span class="nav-text">网站劫持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS跨院资源共享"><span class="nav-number">7.</span> <span class="nav-text">CORS跨院资源共享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#危害CSRF跨站请求伪造"><span class="nav-number">7.1.</span> <span class="nav-text">危害CSRF跨站请求伪造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS验证机制"><span class="nav-number">7.2.</span> <span class="nav-text">CORS验证机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器的多进程与javascript的单线程"><span class="nav-number">8.</span> <span class="nav-text">浏览器的多进程与javascript的单线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器渲染"><span class="nav-number">8.1.</span> <span class="nav-text">浏览器渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器线程"><span class="nav-number">8.2.</span> <span class="nav-text">定时器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步过程的通信机制"><span class="nav-number">8.3.</span> <span class="nav-text">异步过程的通信机制</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2018腾讯春招实习生面试"><span class="nav-number">1.</span> <span class="nav-text">2018腾讯春招实习生面试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目和框架"><span class="nav-number">1.1.</span> <span class="nav-text">项目和框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存"><span class="nav-number">1.2.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">1.3.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">1.4.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他相关知识"><span class="nav-number">1.5.</span> <span class="nav-text">其他相关知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人感受"><span class="nav-number">1.6.</span> <span class="nav-text">个人感受</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器的回流与重绘"><span class="nav-number">1.7.</span> <span class="nav-text">浏览器的回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导致回流的操作"><span class="nav-number">1.7.1.</span> <span class="nav-text">导致回流的操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导致回流的属性和方法"><span class="nav-number">1.7.2.</span> <span class="nav-text">导致回流的属性和方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重绘"><span class="nav-number">1.7.3.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">1.7.4.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js继承"><span class="nav-number">1.8.</span> <span class="nav-text">js继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-shortcomings"><span class="nav-number">1.9.</span> <span class="nav-text">promise shortcomings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手四次挥手"><span class="nav-number">1.10.</span> <span class="nav-text">TCP三次握手四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用原生js实现Ajax请求"><span class="nav-number">1.11.</span> <span class="nav-text">使用原生js实现Ajax请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求"><span class="nav-number">1.11.1.</span> <span class="nav-text">http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http2-0"><span class="nav-number">1.11.2.</span> <span class="nav-text">http2.0</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全防范"><span class="nav-number">1.12.</span> <span class="nav-text">安全防范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS"><span class="nav-number">1.12.1.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF"><span class="nav-number">1.12.2.</span> <span class="nav-text">CSRF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站劫持"><span class="nav-number">1.12.3.</span> <span class="nav-text">网站劫持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS跨域资源共享"><span class="nav-number">1.13.</span> <span class="nav-text">CORS跨域资源共享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#危害CSRF跨站请求伪造"><span class="nav-number">1.13.1.</span> <span class="nav-text">危害CSRF跨站请求伪造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS验证机制"><span class="nav-number">1.13.2.</span> <span class="nav-text">CORS验证机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器的多进程与javascript的单线程"><span class="nav-number">1.14.</span> <span class="nav-text">浏览器的多进程与javascript的单线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器渲染"><span class="nav-number">1.14.1.</span> <span class="nav-text">浏览器渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定时器线程"><span class="nav-number">1.14.2.</span> <span class="nav-text">定时器线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步过程的通信机制"><span class="nav-number">1.14.3.</span> <span class="nav-text">异步过程的通信机制</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
