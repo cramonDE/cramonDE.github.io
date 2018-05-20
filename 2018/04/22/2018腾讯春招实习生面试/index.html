@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/5951fd1efdb8068687df84e9ce87c69b.png">
 <meta property="og:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/12fd8bf0b621fdbbece8b0c4954eee42.png">
 <meta property="og:image" content="http://p1ievg6j8.bkt.clouddn.com/640%3Fwx_fmt=png&wxfrom=5&wx_lazy=1">
-<meta property="og:updated_time" content="2018-05-20T10:19:02.000Z">
+<meta property="og:updated_time" content="2018-05-20T10:36:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="腾讯前端开发岗面试">
 <meta name="twitter:description" content="2018腾讯春招实习生面试 时间：2018-3-14bg：sng-qq空间前端  项目和框架 是否阅读过源码：对angular1的digest循环进行解释 框架的理解，为何选择这类框架，底层实现的机制，mvvm的理解 虚拟dom，设计虚拟dom的diff算法 比较两棵dom树  深度优先遍历，定义差异的类型（修改节点属性，修改节点文本内容，替换原有的节点，节点位置变化包括移动删除 记录差异  深度">
@@ -365,6 +365,11 @@
 <li>使用local storage储存用户输入的密码会有什么风险<br>  <strong>xss漏洞的攻击</strong></li>
 <li>Local storage储存首屏加载的css带来的问题<br>  <strong>前端首页加载的性能优化，如何更新css的问题</strong></li>
 <li>localstorage会引起xss漏洞的原因，怎么解决</li>
+<li>使用<code>local storage</code>控制文件缓存<ul>
+<li>使用loader加载静态文件<br>对所有动态发起的请求进行拦截，查看请求的的文件url是否缓存到localstorage当中，并判断是否过期</li>
+<li>借助服务器将静态文件inline<br>在第一次响应的时候把文件都内联进html中，只要文件版本没有变化（存到cookie）localstorage当中村了读取该文件的代码，通过id查找，或有xss风险</li>
+</ul>
+</li>
 </ul>
 <h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
 <li>回流和重绘的理解</li>
